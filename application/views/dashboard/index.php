@@ -17,7 +17,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3><?= $count_all; ?></h3>
 
                         <p>Total Surat Masuk</p>
                     </div>
