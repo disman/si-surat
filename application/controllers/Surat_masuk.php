@@ -14,6 +14,7 @@ class Surat_masuk extends CI_Controller
     {
         $surat_masuk = $this->surat_masuk_m;
         $data['surat_masuk'] = $surat_masuk->getAll();
+        $data['count_all'] = $surat_masuk->countAll();
 
         $data['title'] = "Surat masuk";
         $this->load->view('_partials/header', $data);
@@ -42,6 +43,7 @@ class Surat_masuk extends CI_Controller
         $surat_masuk = $this->surat_masuk_m;
         $rules = $surat_masuk->editRules();
         $validation = $this->form_validation->set_rules($rules);
+        $data['count_all'] = $surat_masuk->countAll();
 
         if ($validation->run() == false) {
             $data['title'] = "Update data surat masuk";
@@ -53,7 +55,7 @@ class Surat_masuk extends CI_Controller
             $this->load->view('_partials/footer');
         } else {
             $surat_masuk->update();
-            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert>Data surat masuk berhasil diupdate</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert>Data surat masuk berhasil diupdate</div>');
             redirect('surat_masuk');
         }
     }

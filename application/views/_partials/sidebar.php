@@ -32,7 +32,7 @@
                 <a href="<?php echo base_url('surat_masuk'); ?>">
                     <i class="fa fa-laptop"></i> <span>Surat Masuk</span>
                     <span class="pull-right-container">
-                        <small class="label pull-right bg-green">10</small>
+                        <small class="label pull-right bg-green"><?= $count_all; ?></small>
                     </span>
                 </a>
             </li>
