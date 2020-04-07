@@ -251,7 +251,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url('assets/') ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Kang Disman</span>
+                                <span class="hidden-xs"><?= $this->session->userdata['full_name']; ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -284,7 +284,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="<?php echo base_url('auth/logout'); ?>" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>

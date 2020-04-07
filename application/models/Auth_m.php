@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Auth_m extends CI_Model
 {
 
-    private $_table   = 'admin';
+    private $_table   = 'users';
     private $_primary = 'id';
 
     /*
@@ -12,21 +12,28 @@ class Auth_m extends CI_Model
 	 */
     public function rules()
     {
-        $this->form_validation->set_rules('nama', 'Full name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email address', 'trim|required|valid_email');
-        $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[3]|matches[password2]');
+        $this->form_validation->set_rules('full_name', 'Full name', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email address', 'trim|required|valid_email|is_unique[users.email]', [
+            'is_unique' => 'This email has already registered!'
+        ]);
+        $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[3]|matches[password2]', [
+            'matches' => 'Password dont match!',
+            'min_length' => 'Password too short!'
+        ]);
         $this->form_validation->set_rules('password2', 'Password', 'trim|required|matches[password1]');
     }
 
     public function registration()
     {
-        $nama = htmlspecialchars($this->input->post('nama', true));
+        $full_name = htmlspecialchars($this->input->post('full_name', true));
         $email = htmlspecialchars($this->input->post('email', true));
         $password = htmlspecialchars(password_hash($this->input->post('password1', true), PASSWORD_DEFAULT));
         $user = array(
-            'nama'         => $nama,
+            'full_name'    => $full_name,
             'email'        => $email,
-            'password'     => $password
+            'password'     => $password,
+            'is_active'    => 1,
+            'date_created' => time()
         );
         $this->db->insert($this->_table, $user);
     }
