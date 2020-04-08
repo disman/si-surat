@@ -14,8 +14,7 @@ class Surat_masuk_m extends CI_Model
 
     public function countAll()
     {
-        $a = $this->db->count_all($this->_table);
-        return $a;
+        return $this->db->count_all($this->_table);
     }
 
     public function rules()
@@ -112,6 +111,6 @@ class Surat_masuk_m extends CI_Model
 
     public function delete($id)
     {
-        return $this->db->delete($this->_table, array("id" => $id));
+        return $this->db->delete($this->_table, array('id' => $id));
     }
 }

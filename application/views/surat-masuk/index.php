@@ -13,7 +13,7 @@
       <!-- Default box -->
       <div class="box">
          <div class="box-header with-border">
-            <h3 class="box-title"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalSurat"><span class="glyphicon glyphicon-plus"></span> Tambah</button></h3>
+            <h3 class="box-title"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalTambah"><span class="glyphicon glyphicon-plus"></span> Tambah</button></h3>
 
             <div class="box-tools pull-right">
                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -22,6 +22,12 @@
                   <i class="fa fa-times"></i></button>
             </div>
          </div>
+         <?php if (validation_errors()) : ?>
+            <div class="alert alert-danger">
+               <?= validation_errors(); ?>
+            </div>
+         <?php endif; ?>
+         <?php echo $this->session->flashdata('message'); ?>
          <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
                <thead>
@@ -65,26 +71,22 @@
    <!-- /.content -->
 </div>
 
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="modalSurat">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title">Tambah Surat Masuk</h4>
-         </div>
-         <div class="modal-body">
-            <form role="form" action="<?php echo base_url('surat_masuk/tambah'); ?>" method="POST">
+<!-- Modal add -->
+<form role="form" action="<?php echo base_url('surat_masuk/tambah'); ?>" method="POST">
+   <div class="modal fade" id="modalTambah">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               <h4 class="modal-title">Tambah Surat Masuk</h4>
+            </div>
+            <div class="modal-body">
                <div class="box-body">
                   <div class="form-group">
                      <label for="no_indeks">Nomor Indeks</label>
                      <input type="text" name="no_indeks" class="form-control" id="no_indeks" placeholder="Masukan nomor indeks">
-                     <?= form_error('no_indeks', '<small class="text-danger">', '</small>'); ?>
                   </div>
                   <div class="form-group">
                      <label for="no_urut">Nomor Urut</label>
@@ -92,7 +94,7 @@
                   </div>
                   <div class="form-group">
                      <label for="tgl_terima">Tanggal Terima</label>
-                     <input type="text" name="tgl_terima" class="form-control" id="datepicker" placeholder="Masukan nomor indeks">
+                     <input type="text" name="tgl_terima" class="form-control" placeholder="Masukan nomor indeks">
                   </div>
                   <div class="form-group">
                      <label for="perihal">Perihal</label>
@@ -107,12 +109,12 @@
                      <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Masukan keterangan">
                   </div>
                </div>
-            </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
          </div>
       </div>
    </div>
-</div>
+</form>
